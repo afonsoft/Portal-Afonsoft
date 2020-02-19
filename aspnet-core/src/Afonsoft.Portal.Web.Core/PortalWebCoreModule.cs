@@ -63,7 +63,7 @@ namespace Afonsoft.Portal.Web
 
             Configuration.Caching.Configure(TwoFactorCodeCacheItem.CacheName, cache =>
             {
-                cache.DefaultAbsoluteExpireTime = TimeSpan.FromMinutes(2);
+                cache.DefaultAbsoluteExpireTime = TimeSpan.FromMinutes(5);
             });
 
             if (_appConfiguration["Authentication:JwtBearer:IsEnabled"] != null && bool.Parse(_appConfiguration["Authentication:JwtBearer:IsEnabled"]))
