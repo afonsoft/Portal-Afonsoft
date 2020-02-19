@@ -64,7 +64,7 @@ namespace Afonsoft.Portal.Web.Startup
 #if DEBUG
                 .AddRazorRuntimeCompilation()
 #endif
-                .AddNewtonsoftJson();
+                .AddNewtonsoftJson(x=>x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 			services.AddSignalR(options => { options.EnableDetailedErrors = true; });
             IdentityRegistrar.Register(services);
