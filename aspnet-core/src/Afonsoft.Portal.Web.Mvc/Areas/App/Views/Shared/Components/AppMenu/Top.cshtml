@@ -1,0 +1,50 @@
+﻿@using Afonsoft.Portal.Web.Areas.App.Models.Layout
+@using Afonsoft.Portal.Web.Areas.App.Views.Shared.Components.AppMenu
+@model MenuViewModel
+@{
+    Layout = null;
+    var theme = await GetTheme();
+}
+
+<button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn">
+    <i class="la la-close"></i>
+</button>
+<div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+    
+    <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
+        <ul class="kt-menu__nav"
+            role="menubar"
+            aria-label="@L("TopMenu")">
+            @if (theme.BaseSettings.Menu.SearchActive)
+            {
+                <li class="kt-menu__item kt-menu__item--submenu menuSearchItem searchMenuTop searchMenuContainerSelect2" aria-haspopup="true">
+                    <select class="form-control searchMenuSelect2" aria-describedby="basic-addon2">
+                        <option value="">@L("SearchMenuItems")</option>
+                    </select>
+                </li>
+            }
+            @for (var i = 0; i < Model.Menu.Items.Count; i++)
+            {
+                var menuItem = Model.Menu.Items[i];
+                @await Html.PartialAsync("Components/AppMenu/_TopUserMenuItem", new UserMenuItemViewModel
+                {
+                    MenuItem = menuItem,
+                    MenuItemIndex = i,
+                    ItemDepth = 0,
+                    RootLevel = true,
+                    CurrentPageName = Model.CurrentPageName,
+                    IsTabMenuUsed = theme.IsTabMenuUsed
+                })
+            }
+
+        </ul>
+    </div>
+    @if (theme.BaseSettings.Menu.SearchActive)
+    {
+        <div class="kt-header-toolbar searchMenuContainerSelect2 searchMenuBottom">
+            <select id="searchMenuSelect2" class="form-control searchMenuSelect2" aria-describedby="basic-addon2">
+                <option value="">@L("QuickNav")</option>
+            </select>
+        </div>
+    }
+</div>

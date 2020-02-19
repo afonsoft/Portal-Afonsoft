@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Abp.AspNetZeroCore</id>
+    <version>1.2.4</version>
+    <authors>Abp.AspNetZeroCore</authors>
+    <owners>Abp.AspNetZeroCore</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>http://www.aspnetzero.com/</projectUrl>
+    <iconUrl>http://www.aspnetboilerplate.com/images/abp_nupkg.png</iconUrl>
+    <description>Package Description</description>
+    <repository type="git" url="https://github.com/aspnetzero" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="Abp.Web.Common" version="4.2.0" exclude="Build,Analyzers" />
+        <dependency id="Abp.ZeroCore" version="4.2.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETCoreApp2.2">
+        <dependency id="Abp.Web.Common" version="4.2.0" exclude="Build,Analyzers" />
+        <dependency id="Abp.ZeroCore" version="4.2.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

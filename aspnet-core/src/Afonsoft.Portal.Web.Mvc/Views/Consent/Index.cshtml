@@ -1,0 +1,88 @@
+﻿@model Afonsoft.Portal.Web.Models.Consent.ConsentViewModel
+@{
+    Layout = "~/Views/Account/_Layout.cshtml";
+    ViewBag.DisableTenantChange = true;
+}
+
+@if (Model.ClientLogoUrl != null)
+{
+    <div class="client-logo"><img src="@Model.ClientLogoUrl"></div>
+}
+
+
+
+
+
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <!-- begin:: Content -->
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            @L("ClientIsRequestingYourPermission", Model.ClientName)
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+
+                    <form asp-action="Index">
+                        <input type="hidden" asp-for="ReturnUrl" />
+
+                        @if (Model.IdentityScopes.Any())
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    @L("PersonalInformations")
+                                </div>
+                                <ul class="list-group">
+                                    @foreach (var scope in Model.IdentityScopes)
+                                    {
+                                        @await Html.PartialAsync("_ScopeListItem", scope)
+                                    }
+                                </ul>
+                            </div>
+                        }
+
+                        @if (Model.ResourceScopes.Any())
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span class="glyphicon glyphicon-tasks"></span>
+                                    @L("ApplicationAccess")
+                                </div>
+                                <ul class="list-group">
+                                    @foreach (var scope in Model.ResourceScopes)
+                                    {
+                                        @await Html.PartialAsync("_ScopeListItem", scope)
+                                    }
+                                </ul>
+                            </div>
+                        }
+
+                        @if (Model.AllowRememberConsent)
+                        {
+                            <div class="consent-remember">
+                                <label>
+                                    <input class="consent-scopecheck" asp-for="RememberConsent" />
+                                    <strong>@L("RememberMyDecision")</strong>
+                                </label>
+                            </div>
+                        }
+
+                        <div class="consent-buttons float-right" style="margin-top: 20px">
+                            <button name="button" value="yes" class="btn btn-primary" autofocus>@L("Allow")</button>
+                            <button name="button" value="no" class="btn btn-danger">@L("DoNotAllow")</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:: Content -->
+</div>

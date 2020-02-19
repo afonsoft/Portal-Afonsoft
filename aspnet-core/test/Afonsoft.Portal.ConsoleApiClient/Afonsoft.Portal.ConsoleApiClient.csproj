@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+ 
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Abp.Web.Common" Version="5.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Afonsoft.Portal.Application.Shared\Afonsoft.Portal.Application.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

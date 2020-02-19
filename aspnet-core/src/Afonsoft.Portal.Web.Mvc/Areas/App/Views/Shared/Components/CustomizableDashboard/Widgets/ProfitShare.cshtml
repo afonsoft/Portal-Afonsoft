@@ -1,0 +1,119 @@
+﻿@using Afonsoft.Portal.Web.Resources
+
+@inject IWebResourceManager WebResourceManager
+@{
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/morris.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/raphael.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/jquery.flot.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/jquery.waypoints.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/jquery.counterup.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/topojson.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/jquery.easypiechart.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/chartist.min.js");
+}
+
+<div class="kt-portlet kt-portlet--height-fluid ProfitShareContainer">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                Profit Share
+                <small>
+                    Profit Share between customers
+                </small>
+            </h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+            <div class="dropdown dropdown-inline">
+                <button type="button" class="btn btn-clean btn-sm btn-icon-md btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="flaticon-more-1"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md" x-placement="bottom-end" style="position: absolute; transform: translate3d(-227px, 33px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!--begin::Nav-->
+                    <ul class="kt-nav">
+                        <li class="kt-nav__head">
+                            Export Options
+                            <span data-toggle="kt-tooltip" data-placement="right" title="" data-original-title="Click to learn more...">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand kt-svg-icon--md1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"></circle>
+                                        <rect fill="#000000" x="11" y="10" width="2" height="7" rx="1"></rect>
+                                        <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1"></rect>
+                                    </g>
+                                </svg>
+                            </span>
+                        </li>
+                        <li class="kt-nav__separator"></li>
+                        <li class="kt-nav__item">
+                            <a href="#" class="kt-nav__link">
+                                <i class="kt-nav__link-icon flaticon2-drop"></i>
+                                <span class="kt-nav__link-text">Activity</span>
+                            </a>
+                        </li>
+                        <li class="kt-nav__item">
+                            <a href="#" class="kt-nav__link">
+                                <i class="kt-nav__link-icon flaticon2-calendar-8"></i>
+                                <span class="kt-nav__link-text">FAQ</span>
+                            </a>
+                        </li>
+                        <li class="kt-nav__item">
+                            <a href="#" class="kt-nav__link">
+                                <i class="kt-nav__link-icon flaticon2-telegram-logo"></i>
+                                <span class="kt-nav__link-text">Settings</span>
+                            </a>
+                        </li>
+                        <li class="kt-nav__item">
+                            <a href="#" class="kt-nav__link">
+                                <i class="kt-nav__link-icon flaticon2-new-email"></i>
+                                <span class="kt-nav__link-text">Support</span>
+                                <span class="kt-nav__link-badge">
+                                    <span class="kt-badge kt-badge--success kt-badge--rounded">5</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="kt-nav__separator"></li>
+                        <li class="kt-nav__foot">
+                            <a class="btn btn-label-danger btn-bold btn-sm" href="#">Upgrade plan</a>
+                            <a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="" data-original-title="Click to learn more...">Learn more</a>
+                        </li>
+                    </ul>
+                    <!--end::Nav-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <div class="row align-items-center">
+            <div class="col">
+                <div id="kt_chart_profit_share" class="kt-widget14__chart kt_chart_profit_share" style="height: 160px">
+                    <div class="kt-widget14__stat">
+                        45
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="kt-widget14__legend">
+                    <div class="kt-widget14__legend">
+                        <span class="kt-widget14__legend-bullet m--bg-accent"></span>
+                        <span class="kt-widget14__legend-text">
+
+                        </span>
+                    </div>
+                    <div class="kt-widget14__legend">
+                        <span class="kt-widget14__legend-bullet m--bg-warning"></span>
+                        <span class="kt-widget14__legend-text">
+
+                        </span>
+                    </div>
+                    <div class="kt-widget14__legend">
+                        <span class="kt-widget14__legend-bullet m--bg-brand"></span>
+                        <span class="kt-widget14__legend-text">
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

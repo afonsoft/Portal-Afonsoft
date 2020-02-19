@@ -1,0 +1,25 @@
+﻿@using Afonsoft.Portal.Localization
+@{
+    Layout = "~/Views/Account/_Layout.cshtml";
+    ViewBag.DisableTenantChange = true;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Views/Stripe/GetPaymentResult.js" asp-append-version="true"></script>
+}
+
+@section Styles{
+    <link href="/metronic/common/css/login-1@(CultureHelper.IsRtl ? ".rtl":"").css" rel="stylesheet" />
+    <link href="~/view-resources/Views/Payment/GetPaymentResult.css" rel="stylesheet" />
+}
+
+<input type="hidden" id="paymentId" value="@ViewBag.PaymentId" />
+<div class="kt-login__form align-middle m-0" style="height: 250px">
+    <div class="kt-login__title mb-3">
+        <h3>@L("PleaseWait")</h3>
+        <p class="text-center">
+            @L("ReceivingPaymentResult") @L("PleaseWait")
+        </p>
+    </div>
+    <div id="loading" class=" my-5">&emsp;</div>
+</div>

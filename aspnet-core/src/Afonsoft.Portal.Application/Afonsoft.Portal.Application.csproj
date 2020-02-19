@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props"></Import>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>Afonsoft.Portal.Application</AssemblyName>
+    <PackageId>Afonsoft.Portal.Application</PackageId>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>Afonsoft.Portal</RootNamespace>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Afonsoft.Portal.Application.Shared\Afonsoft.Portal.Application.Shared.csproj" />
+    <ProjectReference Include="..\Afonsoft.Portal.Core\Afonsoft.Portal.Core.csproj" />
+    <ProjectReference Include="..\Afonsoft.Portal.EntityFrameworkCore\Afonsoft.Portal.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>

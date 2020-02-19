@@ -1,0 +1,43 @@
+﻿@using Afonsoft.Portal.Web.Areas.App.Startup
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.DemoUiComponents;
+}
+@section Styles
+{
+    <link rel="stylesheet" abp-href="/view-resources/Areas/App/Views/_Bundles/demo-ui-components.css" asp-append-version="true" />
+}
+
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/_Bundles/demo-ui-components.js" asp-append-version="true"></script>
+}
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+    <div class="kt-subheader kt-grid__item">
+        <div class="@(await GetContainerClass())">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>@L("DemoUiComponents")</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+        <div class="col-lg-12 alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            @L("DemoUiComponents_Info")<br />
+            <a href="https://keenthemes.com/metronic/" class="alert-link" target="_blank">@L("DemoUiComponents_Info_Metronic_Link_Text")</a>
+        </div>
+
+        @await Html.PartialAsync("_DateAndTimePickers")
+
+        @await Html.PartialAsync("_FileUpload")
+
+        @await Html.PartialAsync("_Selections")
+
+        @await Html.PartialAsync("_InputMask")
+
+        @await Html.PartialAsync("_Editor")
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@using Afonsoft.Portal.Web.Resources
+
+@inject IWebResourceManager WebResourceManager
+@{
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/morris.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/raphael.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/jquery.flot.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/jquery.waypoints.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/jquery.counterup.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/topojson.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/jquery.easypiechart.min.js");
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Areas/App/Views/_Bundles/chartist.min.js");
+}
+
+<div id="MemberActivity" class="kt-portlet kt-portlet--height-fluid MemberActivityContainer">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                Member Activity
+            </h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+            <button id="refreshMemberActivityButton" class="btn btn-primary refreshMemberActivityButton"><i class="fa fa-sync"></i> Refresh</button>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <div class="table-scrollable table-scrollable-borderless">
+            <table class="table table-hover table-light">
+                <thead class="ng-tns-c19-1"><tr class="uppercase"><th class="ng-tns-c19-1" colspan="2"> MEMBER </th><th class="ng-tns-c19-1"> Earnings </th><th class="ng-tns-c19-1"> CASES </th><th class="ng-tns-c19-1"> CLOSED </th><th class="ng-tns-c19-1"> RATE </th></tr></thead><!---->
+                <tr class="ng-tns-c19-1 ng-star-inserted">
+                    <td class="fit">
+                        <div class="kt-user-card-v2">
+                            <div class="kt-user-card-v2__pic"><img class="ng-tns-c19-1" alt="photo" src="~/Common/Images/SampleProfilePics/sample-profile-01.jpg"></div>
+                        </div>
+                    </td>
+                    <td class="ng-tns-c19-1"><a class="primary-link" href="javascript:;">Brain</a></td>
+                    <td class="ng-tns-c19-1"> $126 </td>
+                    <td class="ng-tns-c19-1"> 35 </td>
+                    <td class="ng-tns-c19-1"> 58 </td>
+                    <td class="ng-tns-c19-1"><span class="bold font-green-haze">56%</span></td>
+                </tr>
+                <tr class="ng-tns-c19-1 ng-star-inserted">
+                    <td class="fit">
+                        <div class="kt-user-card-v2">
+                            <div class="kt-user-card-v2__pic"><img class="ng-tns-c19-1" alt="photo" src="~/Common/Images/SampleProfilePics/sample-profile-02.jpg"></div>
+                        </div>
+                    </td>
+                    <td class="ng-tns-c19-1"><a class="primary-link" href="javascript:;">Jane</a></td>
+                    <td class="ng-tns-c19-1"> $359 </td>
+                    <td class="ng-tns-c19-1"> 68 </td>
+                    <td class="ng-tns-c19-1"> 91 </td>
+                    <td class="ng-tns-c19-1"><span class="bold font-green-haze">26%</span></td>
+                </tr>
+                <tr class="ng-tns-c19-1 ng-star-inserted">
+                    <td class="fit">
+                        <div class="kt-user-card-v2">
+                            <div class="kt-user-card-v2__pic"><img class="ng-tns-c19-1" alt="photo" src="~/Common/Images/SampleProfilePics/sample-profile-03.jpg"></div>
+                        </div>
+                    </td>
+                    <td class="ng-tns-c19-1"><a class="primary-link" href="javascript:;">Tim</a></td>
+                    <td class="ng-tns-c19-1"> $146 </td>
+                    <td class="ng-tns-c19-1"> 50 </td>
+                    <td class="ng-tns-c19-1"> 95 </td>
+                    <td class="ng-tns-c19-1"><span class="bold font-green-haze">24%</span></td>
+                </tr>
+                <tr class="ng-tns-c19-1 ng-star-inserted">
+                    <td class="fit">
+                        <div class="kt-user-card-v2">
+                            <div class="kt-user-card-v2__pic"><img class="ng-tns-c19-1" alt="photo" src="~/Common/Images/SampleProfilePics/sample-profile-04.jpg"></div>
+                        </div>
+                    </td>
+                    <td class="ng-tns-c19-1"><a class="primary-link" href="javascript:;">Kate</a></td>
+                    <td class="ng-tns-c19-1"> $391 </td>
+                    <td class="ng-tns-c19-1"> 95 </td>
+                    <td class="ng-tns-c19-1"> 108 </td>
+                    <td class="ng-tns-c19-1"><span class="bold font-green-haze">71%</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

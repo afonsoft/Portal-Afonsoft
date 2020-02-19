@@ -1,0 +1,23 @@
+﻿@using Afonsoft.Portal.Localization
+@{
+    Layout = "~/Views/Account/_Layout.cshtml";
+    ViewBag.DisableTenantChange = true;
+}
+
+@section Styles{
+    <link href="/metronic/common/css/login-1@(CultureHelper.IsRtl ? ".rtl":"").css" rel="stylesheet" />
+    <link href="~/view-resources/Views/Payment/GetPaymentResult.css" rel="stylesheet" />
+}
+
+<div class="kt-login__form align-middle m-0" style="height: 350px">
+    <div class="kt-login__title mb-3">
+        <h3>@L("ThankYou")</h3>
+        <p class="text-center">
+            @L("YourPaymentHasBeenCompleted")
+        </p>
+
+        <div class=" my-5">&emsp;<i class="fas fa-check fa-4x text-success"></i></div>
+
+        <a class="btn btn-info" href="@Url.Action("Index","SubscriptionManagement",new {Area="App"})"> @L("GoToSubscriptionManagement")</a>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@using Afonsoft.Portal.Web.Areas.App.Models.Layout
+@using Afonsoft.Portal.Web.Areas.App.Views.Shared.Components.AppLogo
+@model HeaderViewModel
+@{
+    Layout = null;
+    var theme = await GetTheme();
+}
+
+<div class="kt-header__brand " id="kt_header_brand">
+    <div class="kt-header__brand-logo">
+        <a href="@Url.Action("Index", "Home", new {area = string.Empty})" target="_blank">
+            @await Component.InvokeAsync(typeof(AppLogoViewComponent), new { LogoSkin = "dark" })
+        </a>
+    </div>
+</div>

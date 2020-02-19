@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Abp.AspNetZeroCore</id>
+    <version>2.0.0</version>
+    <authors>Abp.AspNetZeroCore</authors>
+    <owners>Abp.AspNetZeroCore</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>http://www.aspnetzero.com/</projectUrl>
+    <iconUrl>http://www.aspnetboilerplate.com/images/abp_nupkg.png</iconUrl>
+    <description>Package Description</description>
+    <repository type="git" url="https://github.com/aspnetzero" />
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.0">
+        <dependency id="Abp.Web.Common" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="Abp.ZeroCore" version="5.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework=".NETCoreApp3.0">
+        <frameworkReference name="Microsoft.AspNetCore.App" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/netcoreapp3.0/launchSettings.json" buildAction="Content" />
+      <files include="any/netcoreapp3.0/Properties/launchSettings.json" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+</package>

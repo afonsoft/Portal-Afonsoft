@@ -1,0 +1,21 @@
+﻿@using Afonsoft.Portal.Web.Areas.App.Models.Layout
+@using Afonsoft.Portal.Web.Areas.App.Views.Shared.Components.AppLogo
+@model HeaderViewModel
+@{
+    Layout = null;
+    var theme = await GetTheme();
+}
+<div id="kt_aside_brand" class="kt-aside__brand kt-grid__item">
+    <div class="kt-aside__brand-logo">
+        <a href="@Url.Action("Index", "Home", new {area = string.Empty})" target="_blank">
+            @await Component.InvokeAsync(typeof(AppLogoViewComponent))
+        </a>
+    </div>
+    <div class="kt-aside__brand-tools">
+        <div class="kt-aside__brand-tools">
+            <button class="kt-aside__brand-aside-toggler" id="kt_aside_toggler">
+                <span></span>
+            </button>
+        </div>
+    </div>
+</div>

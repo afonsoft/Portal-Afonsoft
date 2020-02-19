@@ -1,0 +1,62 @@
+﻿@import "../mobile-header.less";
+@import "../cookie-consent.less";
+
+.kt-header__topbar-username {
+    color: #8a88a2 !important;
+}
+
+li.kt-menu__item {
+    &.kt-menu__item--hover {
+        span.kt-menu__link-icon {
+            background-color: transparent !important;
+        }
+    }
+}
+
+.kt-header__topbar {
+    .subscription-warning {
+        padding-top: 30px;
+    }
+}
+
+.unread-notification-count {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    font-size: 1.0rem !important;
+}
+
+
+@media (min-width: 1025px) {
+    .searchMenuContainerSelect2 .select2-container {
+        width: 70px !important
+    }
+
+    .searchMenuDropDownSelect2 .select2-dropdown {
+        width: 250px !important;
+    }
+
+    .searchMenuContainerSelect2 .select2-selection__rendered {
+        min-height: 35px;
+    }
+
+    .searchMenuContainerSelect2 .select2-selection__placeholder {
+        display: none;
+    }
+
+    #kt_aside_menu_wrapper{
+        margin-top: 80px !important; 
+    }
+}
+
+@media (max-width: 1024px) {
+    .searchMenuContainerSelect2 {
+        width: calc(100% - 20px) !important;
+        margin: 10px;
+        margin-left: 30px;
+
+        .select2-container {
+            width: 214px !important;
+        }
+    }
+}

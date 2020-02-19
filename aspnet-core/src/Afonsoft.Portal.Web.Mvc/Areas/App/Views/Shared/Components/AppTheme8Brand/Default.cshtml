@@ -1,0 +1,24 @@
+﻿@using Abp.Runtime.Session
+@using Afonsoft.Portal.Web.Areas.App.Models.Layout
+@using Afonsoft.Portal.Web.Areas.App.Views.Shared.Components.AppLogo
+@model HeaderViewModel
+@{
+    Layout = null;
+}
+
+<div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
+    <div class="kt-header__brand-logo">
+        <a href="@Url.Action("Index", "Home", new {area = string.Empty})" target="_blank">
+            @if (AbpSession.TenantId == null || Model.LoginInformations?.Tenant?.LogoId == null)
+            {
+                <img src="/Common/Images/app-logo-on-dark.svg" alt="logo" height="38" class="kt-header__brand-logo-default" />
+                <img src="/Common/Images/app-logo-on-light.svg" alt="logo" height="38" class="kt-header__brand-logo-sticky" />
+            }
+            else
+            {
+                @await Component.InvokeAsync(typeof(AppLogoViewComponent))
+                @await Component.InvokeAsync(typeof(AppLogoViewComponent), new { logoClass = "kt-header__brand-logo-sticky" })
+            }
+        </a>
+    </div>
+</div>
