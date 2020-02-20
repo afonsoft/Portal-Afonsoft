@@ -38,6 +38,7 @@ using Afonsoft.Portal.Configure;
 using Afonsoft.Portal.Schemas;
 using Afonsoft.Portal.Web.HealthCheck;
 using HealthChecksUISettings = HealthChecks.UI.Configuration.Settings;
+using Microsoft.Extensions.Logging;
 
 namespace Afonsoft.Portal.Web.Startup
 {
@@ -60,7 +61,7 @@ namespace Afonsoft.Portal.Web.Startup
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
-            }).AddNewtonsoftJson();
+            }).AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             //Configure CORS for angular2 UI
             services.AddCors(options =>
@@ -180,6 +181,8 @@ namespace Afonsoft.Portal.Web.Startup
                 app.UseStatusCodePagesWithRedirects("~/Error?statusCode={0}");
                 app.UseExceptionHandler("/Error");
             }
+
+            loggerFactory.AddLog4Net();
 
             app.UseStaticFiles();
             app.UseRouting();
