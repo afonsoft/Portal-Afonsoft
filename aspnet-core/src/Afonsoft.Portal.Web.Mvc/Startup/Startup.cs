@@ -57,10 +57,7 @@ namespace Afonsoft.Portal.Web.Startup
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             //MVC
-            services.AddControllersWithViews(options =>
-            {
-                options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
-            })
+            services.AddControllersWithViews()
 #if DEBUG
                 .AddRazorRuntimeCompilation()
 #endif
