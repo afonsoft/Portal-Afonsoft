@@ -146,7 +146,7 @@ namespace Afonsoft.Portal.Web.Startup
                         ValidateLifetime = true,
 
                         // If you want to allow a certain amount of clock drift, set that here
-                        ClockSkew = TimeSpan.FromMinutes(300)
+                        ClockSkew = TimeSpan.FromMinutes(30)
                     };
 
                     options.RefreshOnIssuerKeyNotFound = true;
