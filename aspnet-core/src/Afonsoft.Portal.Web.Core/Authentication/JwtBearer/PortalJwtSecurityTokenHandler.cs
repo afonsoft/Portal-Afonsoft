@@ -63,7 +63,7 @@ namespace Afonsoft.Portal.Web.Authentication.JwtBearer
             var tokenAuthConfiguration = IocManager.Instance.Resolve<TokenAuthConfiguration>();
             cacheManager
                 .GetCache(AppConsts.TokenValidityKey)
-                .Set(tokenValidityKeyClaim.Value, "", absoluteExpireTime: tokenAuthConfiguration.AccessTokenExpiration);
+                .Set(tokenValidityKeyClaim.Value, securityToken, absoluteExpireTime: tokenAuthConfiguration.AccessTokenExpiration);
 
             return principal;
         }

@@ -119,7 +119,7 @@ namespace Afonsoft.Portal.Web.Startup
 
             services.Configure<SecurityStampValidatorOptions>(options =>
             {
-                options.ValidationInterval = TimeSpan.Zero;
+                options.ValidationInterval = TimeSpan.FromMinutes(30);
             });
 
             if (bool.Parse(_appConfiguration["HealthChecks:HealthChecksEnabled"]))

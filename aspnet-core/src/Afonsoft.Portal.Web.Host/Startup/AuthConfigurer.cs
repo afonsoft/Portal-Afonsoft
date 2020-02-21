@@ -44,9 +44,10 @@ namespace Afonsoft.Portal.Web.Startup
                         ValidateLifetime = true,
 
                         // If you want to allow a certain amount of clock drift, set that here
-                        ClockSkew = TimeSpan.Zero
+                        ClockSkew = TimeSpan.FromMinutes(30)
                     };
 
+                    options.RefreshOnIssuerKeyNotFound = true;
                     options.SecurityTokenValidators.Clear();
                     options.SecurityTokenValidators.Add(new PortalJwtSecurityTokenHandler());
 
@@ -66,6 +67,8 @@ namespace Afonsoft.Portal.Web.Startup
                     options.ApiName = configuration["IdentityServer:ApiName"];
                     options.ApiSecret = configuration["IdentityServer:ApiSecret"];
                     options.RequireHttpsMetadata = false;
+                    options.CacheDuration = TimeSpan.FromMinutes(30);
+                    options.EnableCaching = true;
                 });
             }
         }
