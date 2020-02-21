@@ -13,7 +13,8 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:9902/"
     },
     "Afonsoft.Portal.Web": {
       "commandName": "Project",
@@ -21,7 +22,8 @@
       "launchUrl": "http://localhost:9902",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:9902/"
     }
   }
 }
