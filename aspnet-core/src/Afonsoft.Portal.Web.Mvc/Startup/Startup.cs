@@ -38,6 +38,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Afonsoft.Portal.Web.HealthCheck;
 using HealthChecksUISettings = HealthChecks.UI.Configuration.Settings;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace Afonsoft.Portal.Web.Startup
 {
@@ -137,6 +138,11 @@ namespace Afonsoft.Portal.Web.Startup
                     services.AddHealthChecksUI();
                 }
             }
+
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(_hostingEnvironment.WebRootPath, "Data")))
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(365))
+                .SetApplicationName(_hostingEnvironment.ApplicationName);
 
             //Configure Abp and Dependency Injection
             return services.AddAbp<PortalWebMvcModule>(options =>
