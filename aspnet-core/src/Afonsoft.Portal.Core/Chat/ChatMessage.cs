@@ -11,7 +11,7 @@ namespace Afonsoft.Portal.Chat
     [Table("AppChatMessages")]
     public class ChatMessage : Entity<long>, IHasCreationTime, IMayHaveTenant
     {
-        public const int MaxMessageLength = 4 * 1024; //4KB
+        public const int MaxMessageLength = 8 * 1024; //8KB
 
         public long UserId { get; set; }
 

@@ -19,7 +19,7 @@ namespace Afonsoft.Portal.ConsoleApiClient
 
     class Program
     {
-        private const string ServerUrlBase = "http://localhost:62114/";
+        private const string ServerUrlBase = "http://localhost:9903/";
         
         // If you have changed "Configuration.MultiTenancy.TenantIdResolveKey" in your web app, use the same value here. 
         private const string TenantIdResolveKey = "Abp.TenantId";
