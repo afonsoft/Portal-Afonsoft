@@ -27,20 +27,22 @@
     UiCustomizationSettingsDto theme = await GetTheme();
 }
 <!DOCTYPE html>
-<html lang="en" dir=@(CultureHelper.IsRtl ? "rtl" : "" )>
+<html lang="en" amp dir=@(CultureHelper.IsRtl ? "rtl" : "" )>
 <head prefix="og: http://ogp.me/ns#">
     <title>Portal</title>
     <meta charset="utf-8" />
-
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+    <meta content="Portal Afonsoft" name="description" />
+    <meta content="Afonso Dutra Nogueira Filho" name="author" />
 
     <meta property="og:title" content="Portal" />
     <meta property="og:image" content="@headerViewModel.GetLogoUrl(ApplicationPath, theme.BaseSettings.Menu.AsideSkin)" />
     <meta property="og:description" content="Base solution for your next web application" />
     <meta property="og:url" content="@($" {Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}")">
+
+    <link rel="canonical" href="@($" {Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}")">
 
     <link rel="shortcut icon" href="~/favicon.ico" />
 
@@ -72,6 +74,19 @@
         <link id="TenantCustomCss" rel="stylesheet" href="@Url.Action("GetCustomCss", "TenantCustomization" , new { area = string.Empty, tenantId = loginInfo?.Tenant?.Id })" asp-append-version="true" />
     }
 
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+    <style amp-boilerplate>
+        body {
+            -webkit-animation: none;
+            -moz-animation: none;
+            -ms-animation: none;
+            animation: none
+        }
+    </style>
+    </noscript>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script type="text/javascript">
         @* This is used to get the application's root path from javascript.
         It's useful if you're running application in a virtual directory under IIS. *@

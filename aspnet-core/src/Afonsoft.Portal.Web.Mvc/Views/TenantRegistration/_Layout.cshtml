@@ -17,12 +17,12 @@
     UiCustomizationSettingsDto theme = await GetTheme();
 }
 <!DOCTYPE html>
-<html lang="en" dir=@(CultureHelper.IsRtl ? "rtl" : "")>
+<html lang="en" amp dir=@(CultureHelper.IsRtl ? "rtl" : "")>
 <head>
     <meta charset="utf-8" />
     <title>Portal</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
     @* Fill these meta tags upon your project specification *@
@@ -39,6 +39,8 @@
     <link rel="stylesheet" abp-href="/view-resources/Areas/App/Views/_Bundles/common-styles.css" asp-append-version="true" />
     <link rel="stylesheet" abp-href="/view-resources/Views/TenantRegistration/_Layout.css" asp-append-version="true" />
 
+    <link rel="canonical" href="@($" {Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}")">
+
     @if (CultureHelper.IsRtl)
     {
         <link rel="stylesheet" href="/Common/Styles/abp-zero-template-rtl.css" asp-append-version="true" />
@@ -46,6 +48,7 @@
 
     @await RenderSectionAsync("Styles", false)
 
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script type="text/javascript">
         @* This is used to get the application's root path from javascript.
         It's useful if you're running application in a virtual directory under IIS. *@

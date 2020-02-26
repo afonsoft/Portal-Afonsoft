@@ -11,23 +11,25 @@
     UiCustomizationSettingsDto theme = await GetTheme();
 }
 <!DOCTYPE html>
-<html lang="en" dir=@(CultureHelper.IsRtl ? "rtl" : "" )>
+<html lang="en" amp dir=@(CultureHelper.IsRtl ? "rtl" : "" )>
 <head>
     <title>Portal Installation</title>
 
     <link rel="shortcut icon" href="~/favicon.ico" />
-
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <link rel="stylesheet" abp-href="/view-resources/Areas/App/Views/_Bundles/vendors.bundle.css" asp-append-version="true" />
     <link rel="stylesheet" href="/metronic/themes/default/css/style.bundle.css" asp-append-version="true" />
     <link rel="stylesheet" abp-href="/view-resources/Areas/App/Views/_Bundles/app-layout-libs.css" asp-append-version="true" />
     <link rel="stylesheet" abp-href="/view-resources/Areas/App/Views/_Bundles/common-styles.css" asp-append-version="true" />
+    <link rel="canonical" href="@($" {Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}")">
 
     @if (CultureHelper.IsRtl)
     {
-    <link rel="stylesheet" href="/Common/Styles/abp-zero-template-rtl.css" asp-append-version="true" />
+        <link rel="stylesheet" href="/Common/Styles/abp-zero-template-rtl.css" asp-append-version="true" />
     }
 
     <link rel="stylesheet" abp-href="/view-resources/Views/Install/Index.css" asp-append-version="true" />
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
 </head>
 <body class="kt-page--fixed kt-header--static">
     <div class="content">
