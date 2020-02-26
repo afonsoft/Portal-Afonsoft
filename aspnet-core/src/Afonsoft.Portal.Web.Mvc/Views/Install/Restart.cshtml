@@ -11,7 +11,7 @@
     UiCustomizationSettingsDto theme = await GetTheme();
 }
 <!DOCTYPE html>
-<html lang="en" amp dir=@(CultureHelper.IsRtl ? "rtl" : "" )>
+<html lang="en" dir=@(CultureHelper.IsRtl ? "rtl" : "" )>
 <head>
     <title>Portal Installation</title>
 
@@ -29,7 +29,15 @@
     }
 
     <link rel="stylesheet" abp-href="/view-resources/Views/Install/Index.css" asp-append-version="true" />
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23515540-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23515540-5');
+    </script>
 </head>
 <body class="kt-page--fixed kt-header--static">
     <div class="content">

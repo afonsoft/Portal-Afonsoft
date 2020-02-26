@@ -6,7 +6,7 @@
     UiCustomizationSettingsDto theme = await GetTheme();
 }
 <!DOCTYPE html>
-<html lang="en" amp dir=@(CultureHelper.IsRtl ? "rtl" : "")>
+<html lang="en" dir=@(CultureHelper.IsRtl ? "rtl" : "")>
 <head>
     <meta charset="utf-8" />
 
@@ -44,7 +44,15 @@
             }
         </style>
     </noscript>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23515540-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
+        gtag('config', 'UA-23515540-5');
+    </script>
     <script type="text/javascript">
         @* This is used to get the application's root path from javascript.
         It's useful if you're running application in a virtual directory under IIS. *@
