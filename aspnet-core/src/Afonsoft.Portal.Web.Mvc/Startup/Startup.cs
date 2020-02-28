@@ -39,6 +39,9 @@ using Microsoft.OpenApi.Models;
 using Afonsoft.Portal.Web.HealthCheck;
 using HealthChecksUISettings = HealthChecks.UI.Configuration.Settings;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
+using WebMarkupMin.AspNetCore3;
 
 namespace Afonsoft.Portal.Web.Startup
 {
@@ -143,6 +146,31 @@ namespace Afonsoft.Portal.Web.Startup
                 .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(_hostingEnvironment.WebRootPath, "Data")))
                 .SetDefaultKeyLifetime(TimeSpan.FromDays(365))
                 .SetApplicationName(_hostingEnvironment.ApplicationName);
+
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.EnableForHttps = true;
+            });
+
+            services.Configure<BrotliCompressionProviderOptions>(options => { options.Level = CompressionLevel.Fastest; });
+            services.Configure<GzipCompressionProviderOptions>(options => { options.Level = CompressionLevel.Fastest; });
+
+            services.AddWebMarkupMin(
+            options =>
+            {
+                options.AllowMinificationInDevelopmentEnvironment = true;
+                options.AllowCompressionInDevelopmentEnvironment = true;
+            })
+            .AddHtmlMinification(
+                options =>
+                {
+                    options.MinificationSettings.RemoveRedundantAttributes = true;
+                    options.MinificationSettings.RemoveHttpProtocolFromAttributes = true;
+                    options.MinificationSettings.RemoveHttpsProtocolFromAttributes = true;
+                })
+            .AddHttpCompression();
 
             //Configure Abp and Dependency Injection
             return services.AddAbp<PortalWebMvcModule>(options =>
@@ -252,6 +280,10 @@ namespace Afonsoft.Portal.Web.Startup
             {
                     app.UseHealthChecksUI();
             }
+
+            app.UseResponseCompression();
+
+            app.UseWebMarkupMin();
 
             if (WebConsts.SwaggerUiEnabled)
             {
