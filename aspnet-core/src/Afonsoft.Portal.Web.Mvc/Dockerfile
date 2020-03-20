@@ -1,4 +1,4 @@
-﻿FROM microsoft/dotnet:2.2-aspnetcore-runtime
+﻿FROM microsoft/dotnet:3.1-aspnetcore-runtime
 
 WORKDIR /app
 COPY . .
