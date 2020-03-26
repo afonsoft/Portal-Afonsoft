@@ -119,7 +119,7 @@
     <!-- end::Chat Bar -->
     <!-- begin::Theme Selection Panel -->
     @if (await SettingManager.GetSettingValueAsync<bool>
- (AppSettings.UserManagement.IsQuickThemeSelectEnabled))
+(AppSettings.UserManagement.IsQuickThemeSelectEnabled))
     {
         @await Html.PartialAsync("~/Areas/App/Views/Layout/_ThemeSelectionPanel.cshtml")
     }
@@ -145,7 +145,7 @@
     <script abp-src="/view-resources/Areas/App/Views/Layout/_Header.js" asp-append-version="true"></script>
     <script abp-src="/view-resources/Areas/App/Views/Layout/_Layout.js" asp-append-version="true"></script>
     @if (await SettingManager.GetSettingValueAsync<bool>
- (AppSettings.UserManagement.IsQuickThemeSelectEnabled))
+(AppSettings.UserManagement.IsQuickThemeSelectEnabled))
     {
         <script src="@(ApplicationPath)view-resources/Areas/App/Views/Layout/_ThemeSelectionPanel.js" asp-append-version="true"></script>
     }
@@ -176,6 +176,7 @@
         app.supportsTenancyNameInUrl = @(WebUrlService.SupportsTenancyNameInUrl.ToString().ToLower());
     </script>
     <!--end::Page Snippets -->
+    <script data-ad-client="ca-pub-2122647083447667" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </body>
 <!-- end::Body -->
 </html>
