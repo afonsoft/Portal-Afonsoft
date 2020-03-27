@@ -74,7 +74,7 @@
         <link id="TenantCustomCss" rel="stylesheet" href="@Url.Action("GetCustomCss", "TenantCustomization" , new { area = string.Empty, tenantId = loginInfo?.Tenant?.Id })" asp-append-version="true" />
     }
 
-   <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23515540-5"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -88,6 +88,7 @@
         It's useful if you're running application in a virtual directory under IIS. *@
         var abp = abp || {}; abp.appPath = '@ApplicationPath';
     </script>
+    <script data-ad-client="ca-pub-2122647083447667" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <!-- END HEAD -->
 <!-- begin::Body -->
@@ -176,7 +177,7 @@
         app.supportsTenancyNameInUrl = @(WebUrlService.SupportsTenancyNameInUrl.ToString().ToLower());
     </script>
     <!--end::Page Snippets -->
-    <script data-ad-client="ca-pub-2122647083447667" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
 </body>
 <!-- end::Body -->
 </html>
