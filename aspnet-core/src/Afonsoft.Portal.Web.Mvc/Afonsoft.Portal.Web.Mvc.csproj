@@ -22,7 +22,8 @@
     <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <AspNetCoreModuleName>AspNetCoreModule</AspNetCoreModuleName>
-    <RuntimeIdentifiers>win7-x64;win7-x86;win81-x64;win81-x86;win10-x64;win10-x86;win-x64;win-x86</RuntimeIdentifiers>
+	<ServerGarbageCollection>false</ServerGarbageCollection>
+    <RuntimeIdentifiers>win7-x64;win7-x86;win81-x64;win81-x86;win10-x64;win10-x86;win-x64;win-x86;linux-x64;rhel-x64;rhel.6-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
