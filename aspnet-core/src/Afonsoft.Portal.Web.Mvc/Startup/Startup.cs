@@ -30,8 +30,6 @@ using Afonsoft.Portal.Web.IdentityServer;
 using Afonsoft.Portal.Web.Swagger;
 using Stripe;
 using System.Reflection;
-using Abp.AspNetCore.Mvc.Antiforgery;
-using HealthChecks.UI.Client;
 using IdentityServer4.Configuration;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
@@ -42,6 +40,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using WebMarkupMin.AspNetCore3;
+using HealthChecks.UI.Client;
 
 namespace Afonsoft.Portal.Web.Startup
 {

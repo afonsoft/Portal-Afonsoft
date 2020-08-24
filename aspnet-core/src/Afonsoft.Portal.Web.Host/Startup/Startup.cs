@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Abp.AspNetCore;
-using Abp.AspNetCore.Mvc.Antiforgery;
 using Abp.AspNetCore.SignalR.Hubs;
 using Abp.AspNetZeroCore.Web.Authentication.JwtBearer;
 using Abp.Castle.Logging.Log4Net;
@@ -29,7 +28,6 @@ using Stripe;
 using ILoggerFactory = Microsoft.Extensions.Logging.ILoggerFactory;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
-using HealthChecks.UI.Client;
 using IdentityServer4.Configuration;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
@@ -40,6 +38,7 @@ using Afonsoft.Portal.Web.HealthCheck;
 using HealthChecksUISettings = HealthChecks.UI.Configuration.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.DataProtection;
+using HealthChecks.UI.Client;
 
 namespace Afonsoft.Portal.Web.Startup
 {
@@ -254,12 +253,10 @@ namespace Afonsoft.Portal.Web.Startup
                 }
             });
 
-            if (bool.Parse(_appConfiguration["HealthChecks:HealthChecksEnabled"]))
+            if (bool.Parse(_appConfiguration["HealthChecks:HealthChecksEnabled"]) 
+                && bool.Parse(_appConfiguration["HealthChecks:HealthChecksUI:HealthChecksUIEnabled"]))
             {
-                if (bool.Parse(_appConfiguration["HealthChecks:HealthChecksUI:HealthChecksUIEnabled"]))
-                {
-                    app.UseHealthChecksUI();
-                }
+                app.UseHealthChecksUI();
             }
 
             if (WebConsts.SwaggerUiEnabled)
