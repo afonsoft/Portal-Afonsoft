@@ -72,4 +72,8 @@
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.8.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="LOGS\" />
+  </ItemGroup>
+
 </Project>

@@ -2,10 +2,8 @@
 using System.Threading.Tasks;
 using Abp;
 using Abp.AspNetCore.SignalR.Hubs;
-using Abp.Auditing;
 using Abp.Localization;
 using Abp.RealTime;
-using Abp.Runtime.Session;
 using Abp.UI;
 using Castle.Core.Logging;
 using Castle.Windsor;
@@ -28,19 +26,18 @@ namespace Afonsoft.Portal.Web.Chat.SignalR
             ILocalizationManager localizationManager,
             IWindsorContainer windsorContainer,
             IOnlineClientManager<ChatChannel> onlineClientManager,
-            IClientInfoProvider clientInfoProvider) : base(onlineClientManager, clientInfoProvider)
+            IOnlineClientInfoProvider clientInfoProvider) : base(onlineClientManager, clientInfoProvider)
         {
             _chatMessageManager = chatMessageManager;
             _localizationManager = localizationManager;
             _windsorContainer = windsorContainer;
 
             Logger = NullLogger.Instance;
-            AbpSession = NullAbpSession.Instance;
         }
 
         public async Task<string> SendMessage(SendChatMessageInput input)
         {
-            var sender = AbpSession.ToUserIdentifier();
+            var sender = Context.ToUserIdentifier();
             var receiver = new UserIdentifier(input.TenantId, input.UserId);
 
             try

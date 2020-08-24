@@ -163,7 +163,7 @@ namespace Afonsoft.Portal.Web.Controllers
             returnUrl = NormalizeReturnUrl(returnUrl);
             if (!string.IsNullOrWhiteSpace(returnUrlHash))
             {
-                returnUrl = returnUrl + returnUrlHash;
+                returnUrl += returnUrlHash;
             }
 
             if (UseCaptchaOnLogin())
@@ -212,7 +212,7 @@ namespace Afonsoft.Portal.Web.Controllers
                         "SendSecurityCode",
                         new
                         {
-                            returnUrl = returnUrl,
+                            returnUrl,
                             rememberMe = loginModel.RememberMe
                         })
                 });
@@ -700,7 +700,7 @@ namespace Afonsoft.Portal.Web.Controllers
                 {
                     ReturnUrl = returnUrl,
                     authSchema = provider,
-                    ss = ss
+                    ss
                 });
 
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
