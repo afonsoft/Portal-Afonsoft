@@ -31,7 +31,7 @@ namespace Afonsoft.Portal.Migrations.Seed.Host
             AddSettingIfNotExists(EmailSettingNames.DefaultFromDisplayName, "afonsoft.com.br mailer", tenantId);
 
             //Languages
-            AddSettingIfNotExists(LocalizationSettingNames.DefaultLanguage, "en", tenantId);
+            AddSettingIfNotExists(LocalizationSettingNames.DefaultLanguage, "pt-BR", tenantId);
         }
 
         private void AddSettingIfNotExists(string name, string value, int? tenantId = null)
