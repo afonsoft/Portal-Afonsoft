@@ -30,14 +30,14 @@
     <PackageReference Include="Stripe.net" Version="37.34.0" />
     <PackageReference Include="PayPalCheckoutSdk" Version="1.0.3" />
     <PackageReference Include="TimeZoneConverter" Version="3.2.0" />
-    <PackageReference Include="Abp.AspNetZeroCore" Version="2.0.0" />
+    <PackageReference Include="Abp.AspNetZeroCore" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.ZeroCore.IdentityServer4.EntityFrameworkCore" Version="5.2.0" />
-    <PackageReference Include="Abp.AutoMapper" Version="5.2.0" />
-    <PackageReference Include="Abp.MailKit" Version="5.2.0" />
-    <PackageReference Include="Abp.Zero.Ldap" Version="5.2.0" />
+    <PackageReference Include="Abp.ZeroCore.IdentityServer4.EntityFrameworkCore" Version="5.12.0" />
+    <PackageReference Include="Abp.AutoMapper" Version="5.12.0" />
+    <PackageReference Include="Abp.MailKit" Version="5.12.0" />
+    <PackageReference Include="Abp.Zero.Ldap" Version="5.12.0" />
     <PackageReference Include="Twilio" Version="5.46.0" />
   </ItemGroup>
 

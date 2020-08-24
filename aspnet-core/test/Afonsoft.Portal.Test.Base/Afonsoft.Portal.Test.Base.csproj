@@ -35,7 +35,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Abp.TestBase" Version="5.2.0" />
+    <PackageReference Include="Abp.TestBase" Version="5.12.0" />
   </ItemGroup>
 
   <ItemGroup>

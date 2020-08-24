@@ -23,10 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.AspNetCore.SignalR" Version="5.2.0" />
-    <PackageReference Include="Abp.AspNetZeroCore.Web" Version="2.0.0" />
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="5.12.0" />
+    <PackageReference Include="Abp.AspNetZeroCore.Web" Version="2.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
-    <PackageReference Include="Hangfire.SqlServer" Version="1.7.9" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.11" />
     <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.2" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
@@ -34,10 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.ZeroCore.IdentityServer4" Version="5.2.0" />
-    <PackageReference Include="Abp.AspNetCore" Version="5.2.0" />
-    <PackageReference Include="Abp.HangFire.AspNetCore" Version="5.2.0" />
-    <PackageReference Include="Abp.RedisCache" Version="5.2.0" />
+    <PackageReference Include="Abp.ZeroCore.IdentityServer4" Version="5.12.0" />
+    <PackageReference Include="Abp.AspNetCore" Version="5.12.0" />
+    <PackageReference Include="Abp.HangFire.AspNetCore" Version="5.12.0" />
+    <PackageReference Include="Abp.RedisCache" Version="5.12.0" />
   </ItemGroup>
   
   
