@@ -282,7 +282,6 @@
     <text name="LookingForMpaVersion">Procurando pela versão Multi-Page da aplicação?</text>
     <text name="LookingForSpaVersion">Procurando pela versão Single-Page da aplicação?</text>
     <text name="ThisLanguageAlreadyExists">Essa linguagem já existe!</text>
-    <text name="OrganizationUnits">Unidades organizacionais</text>
     <text name="OrganizationUnitsHeaderInfo">Use as unidades organizacionais para organizar membros e entidades</text>
     <text name="OrganizationTree">Árvore Organizacional</text>
     <text name="Members">Membros</text>
@@ -663,7 +662,7 @@
     <text name="YourPhoneNumberIsNotVerified">Your phone number is not verified</text>
     <text name="WrongSmsVerificationCode">Wrong verification code!</text>
     <text name="SelectUsers">Select users</text>
-    <text name="OrganizationUnits">Organization Units</text>
+    <text name="OrganizationUnits">Unidades organizacionais</text>
     <text name="YouCanManageUsersOrganizationUnitsFromOrganizationUnitsPage">You can manage User's organization units From Organization Units page.</text>
     <text name="DemoUiComponents">Demo UI Components</text>
     <text name="DateAndTimePickers">Date and Time Pickers</text>
