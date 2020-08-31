@@ -18,7 +18,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Afonsoft.Portal.Configuration;
 using Afonsoft.Portal.EntityFrameworkCore;
-using Afonsoft.Portal.Startup;
 using Afonsoft.Portal.Web.Authentication.JwtBearer;
 using Afonsoft.Portal.Web.Authentication.TwoFactor;
 using Afonsoft.Portal.Web.Configuration;
@@ -31,7 +30,6 @@ namespace Afonsoft.Portal.Web
         typeof(PortalEntityFrameworkCoreModule),
         typeof(AbpAspNetZeroCoreWebModule),
         typeof(AbpAspNetCoreSignalRModule),
-        typeof(PortalGraphQLModule),
         typeof(AbpRedisCacheModule), //AbpRedisCacheModule dependency (and Abp.RedisCache nuget package) can be removed if not using Redis cache
         typeof(AbpHangfireAspNetCoreModule) //AbpHangfireModule dependency (and Abp.Hangfire.AspNetCore nuget package) can be removed if not using Hangfire
     )]

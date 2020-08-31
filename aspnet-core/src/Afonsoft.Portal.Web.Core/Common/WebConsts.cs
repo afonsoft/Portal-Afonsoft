@@ -14,14 +14,5 @@ namespace Afonsoft.Portal.Web.Common
         {
             PortalConsts.AbpApiClientUserAgent
         };
-
-        public static class GraphQL
-        {
-            public const string PlaygroundEndPoint = "/ui/playground";
-            public const string EndPoint = "/graphql";
-
-            public static bool PlaygroundEnabled = true;
-            public static bool Enabled = true;
-        }
     }
 }

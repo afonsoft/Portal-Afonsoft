@@ -22,23 +22,15 @@ using Afonsoft.Portal.Identity;
 using Afonsoft.Portal.Web.Chat.SignalR;
 using Afonsoft.Portal.Web.Common;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
-using Afonsoft.Portal.Web.IdentityServer;
 using Afonsoft.Portal.Web.Swagger;
-using Stripe;
 using ILoggerFactory = Microsoft.Extensions.Logging.ILoggerFactory;
-using GraphQL.Server;
-using GraphQL.Server.Ui.Playground;
-using IdentityServer4.Configuration;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Afonsoft.Portal.Configure;
-using Afonsoft.Portal.Schemas;
-using Afonsoft.Portal.Web.HealthCheck;
-using HealthChecksUISettings = HealthChecks.UI.Configuration.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.DataProtection;
-using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
 
 namespace Afonsoft.Portal.Web.Startup
 {
@@ -81,22 +73,10 @@ namespace Afonsoft.Portal.Web.Startup
                         .AllowCredentials();
                 });
             });
-			
-			services.AddSignalR(options => { options.EnableDetailedErrors = true; });
+
+            services.AddSignalR(options => { options.EnableDetailedErrors = true; });
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
-
-            //Identity server
-            if (bool.Parse(_appConfiguration["IdentityServer:IsEnabled"]))
-            {
-                IdentityServerRegistrar.Register(services, _appConfiguration, options =>
-                     options.UserInteraction = new UserInteractionOptions()
-                     {
-                         LoginUrl = "/UI/Login",
-                         LogoutUrl = "/UI/LogOut",
-                         ErrorUrl = "/Error"
-                     });
-            }
 
             if (WebConsts.SwaggerUiEnabled)
             {
@@ -125,34 +105,35 @@ namespace Afonsoft.Portal.Web.Startup
                 //Hangfire(Enable to use Hangfire instead of default job manager)
                 services.AddHangfire(config =>
                 {
+                    config.UseLog4NetLogProvider();
                     config.UseSqlServerStorage(_appConfiguration.GetConnectionString("Default"));
                 });
             }
 
-            if (WebConsts.GraphQL.Enabled)
+            services.Configure<SecurityStampValidatorOptions>(options =>
             {
-                services.AddAndConfigureGraphQL();
-            }
+                options.ValidationInterval = TimeSpan.FromMinutes(30);
+            });
 
-            if (bool.Parse(_appConfiguration["HealthChecks:HealthChecksEnabled"]))
-            {
-                services.AddAbpZeroHealthCheck();
+            services.AddAntiforgery();
+            services.AddHttpClient();
+            services.AddDistributedMemoryCache();
+            services.AddSwaggerGenNewtonsoftSupport();
 
-                var healthCheckUISection = _appConfiguration.GetSection("HealthChecks")?.GetSection("HealthChecksUI");
-
-                if (bool.Parse(healthCheckUISection["HealthChecksUIEnabled"]))
-                {
-                    services.Configure<HealthChecksUISettings>(settings =>
-                    {
-                        healthCheckUISection.Bind(settings, c => c.BindNonPublicProperties = true);
-                    });
-                    services.AddHealthChecksUI();
-                }
-            }
             services.AddDataProtection()
-                .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(_hostingEnvironment.WebRootPath, "Data")))
-                .SetDefaultKeyLifetime(TimeSpan.FromDays(365))
-                .SetApplicationName(_hostingEnvironment.ApplicationName);
+            .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(_hostingEnvironment.WebRootPath, "Data")))
+            .SetDefaultKeyLifetime(TimeSpan.FromDays(365))
+            .SetApplicationName(_hostingEnvironment.ApplicationName);
+
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.EnableForHttps = true;
+            });
+
+            services.Configure<BrotliCompressionProviderOptions>(options => { options.Level = CompressionLevel.Fastest; });
+            services.Configure<GzipCompressionProviderOptions>(options => { options.Level = CompressionLevel.Fastest; });
 
             //Configure Abp and Dependency Injection
             return services.AddAbp<PortalWebHostModule>(options =>
@@ -172,6 +153,7 @@ namespace Afonsoft.Portal.Web.Startup
             app.UseAbp(options =>
             {
                 options.UseAbpRequestLocalization = false; //used below: UseAbpRequestLocalization
+                options.UseCastleLoggerFactory = true;
             });
 
             if (env.IsDevelopment())
@@ -180,6 +162,7 @@ namespace Afonsoft.Portal.Web.Startup
             }
             else
             {
+                app.UseHsts();
                 app.UseStatusCodePagesWithRedirects("~/Error?statusCode={0}");
                 app.UseExceptionHandler("/Error");
             }
@@ -190,74 +173,6 @@ namespace Afonsoft.Portal.Web.Startup
             app.UseRouting();
 
             app.UseCors(DefaultCorsPolicyName); //Enable CORS!
-
-            app.UseAuthentication();
-            app.UseJwtTokenMiddleware();
-
-            if (bool.Parse(_appConfiguration["IdentityServer:IsEnabled"]))
-            {
-                app.UseJwtTokenMiddleware("IdentityBearer");
-                app.UseIdentityServer();
-            }
-
-            app.UseAuthorization();
-
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                if (scope.ServiceProvider.GetService<DatabaseCheckHelper>().Exist(_appConfiguration["ConnectionStrings:Default"]))
-                {
-                    app.UseAbpRequestLocalization();
-                }
-            }
-
-            if (WebConsts.HangfireDashboardEnabled)
-            {
-                //Hangfire dashboard &server(Enable to use Hangfire instead of default job manager)
-                app.UseHangfireDashboard(WebConsts.HangfireDashboardEndPoint, new DashboardOptions
-                {
-                    Authorization = new[] { new AbpHangfireAuthorizationFilter(AppPermissions.Pages_Administration_HangfireDashboard) }
-                });
-                app.UseHangfireServer();
-            }
-
-            if (bool.Parse(_appConfiguration["Payment:Stripe:IsActive"]))
-            {
-                StripeConfiguration.ApiKey = _appConfiguration["Payment:Stripe:SecretKey"];
-            }
-
-            if (WebConsts.GraphQL.Enabled)
-            {
-                app.UseGraphQL<MainSchema>();
-                if (WebConsts.GraphQL.PlaygroundEnabled)
-                {
-                    app.UseGraphQLPlayground(
-                        new GraphQLPlaygroundOptions()); //to explorer API navigate https://*DOMAIN*/ui/playground
-                }
-            }
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<AbpCommonHub>("/signalr");
-                endpoints.MapHub<ChatHub>("/signalr-chat");
-
-                endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-
-                if (bool.Parse(_appConfiguration["HealthChecks:HealthChecksEnabled"]))
-                {
-                    endpoints.MapHealthChecks("/healthz", new HealthCheckOptions()
-                    {
-                        Predicate = _ => true,
-                        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                    });
-                }
-            });
-
-            if (bool.Parse(_appConfiguration["HealthChecks:HealthChecksEnabled"]) 
-                && bool.Parse(_appConfiguration["HealthChecks:HealthChecksUI:HealthChecksUIEnabled"]))
-            {
-                app.UseHealthChecksUI();
-            }
 
             if (WebConsts.SwaggerUiEnabled)
             {
@@ -270,9 +185,49 @@ namespace Afonsoft.Portal.Web.Startup
                     options.SwaggerEndpoint(_appConfiguration["App:SwaggerEndPoint"], "Portal API V1");
                     options.IndexStream = () => Assembly.GetExecutingAssembly()
                         .GetManifestResourceStream("Afonsoft.Portal.Web.wwwroot.swagger.ui.index.html");
-                    options.InjectBaseUrl(_appConfiguration["App:ServerRootAddress"]);
+                    options.InjectBaseUrl(_appConfiguration["App:WebSiteRootAddress"]);
                 }); //URL: /swagger
             }
+
+            app.UseAuthentication();
+            app.UseJwtTokenMiddleware();
+            app.UseAuthorization();
+
+            if (WebConsts.HangfireDashboardEnabled)
+            {
+                //Hangfire dashboard &server(Enable to use Hangfire instead of default job manager)
+                app.UseHangfireDashboard(WebConsts.HangfireDashboardEndPoint, new DashboardOptions
+                {
+                    Authorization = new[] {
+                        new AbpHangfireAuthorizationFilter(AppPermissions.Pages_Administration_HangfireDashboard),
+                        new AbpHangfireAuthorizationFilter(AppPermissions.Pages_Administration),
+                        new AbpHangfireAuthorizationFilter(AppPermissions.Pages)
+                    },
+                    IgnoreAntiforgeryToken = true,
+                });
+                app.UseHangfireServer();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseWebSockets();
+            app.UseResponseCompression();
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                if (scope.ServiceProvider.GetService<DatabaseCheckHelper>().Exist(_appConfiguration["ConnectionStrings:Default"]))
+                {
+                    app.UseAbpRequestLocalization();
+                }
+            }
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<AbpCommonHub>("/signalr");
+                endpoints.MapHub<ChatHub>("/signalr-chat");
+
+                endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
