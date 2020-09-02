@@ -64,10 +64,7 @@ namespace Afonsoft.Portal.Web
                 cache.DefaultAbsoluteExpireTime = TimeSpan.FromMinutes(5);
             });
 
-            if (_appConfiguration["Authentication:JwtBearer:IsEnabled"] != null && bool.Parse(_appConfiguration["Authentication:JwtBearer:IsEnabled"]))
-            {
-                ConfigureTokenAuth();
-            }
+            ConfigureTokenAuth();
 
             IocManager.Register<DashboardViewConfiguration>();
 

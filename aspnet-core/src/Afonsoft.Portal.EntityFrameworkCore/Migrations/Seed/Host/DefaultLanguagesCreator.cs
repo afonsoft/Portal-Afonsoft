@@ -18,19 +18,8 @@ namespace Afonsoft.Portal.Migrations.Seed.Host
             return new List<ApplicationLanguage>
             {
                 new ApplicationLanguage(tenantId, "en", "English", "famfamfam-flags us"),
-                new ApplicationLanguage(tenantId, "en-GB", "English (UK)", "famfamfam-flags gb"),
-                new ApplicationLanguage(tenantId, "ar", "العربية", "famfamfam-flags sa"),
-                new ApplicationLanguage(tenantId, "de", "Deutsch", "famfamfam-flags de"),
-                new ApplicationLanguage(tenantId, "it", "Italiano", "famfamfam-flags it"),
-                new ApplicationLanguage(tenantId, "fr", "Français", "famfamfam-flags fr"),
                 new ApplicationLanguage(tenantId, "pt-BR", "Português (Brasil)", "famfamfam-flags br"),
-                new ApplicationLanguage(tenantId, "tr", "Türkçe", "famfamfam-flags tr"),
-                new ApplicationLanguage(tenantId, "ru", "Pусский", "famfamfam-flags ru"),
-                new ApplicationLanguage(tenantId, "zh-Hans", "简体中文", "famfamfam-flags cn"),
-                new ApplicationLanguage(tenantId, "es-MX", "Español (México)", "famfamfam-flags mx"),
-                new ApplicationLanguage(tenantId, "es", "Español (Spanish)", "famfamfam-flags es"),
-                new ApplicationLanguage(tenantId, "vi", "Tiếng Việt", "famfamfam-flags vn"),
-                new ApplicationLanguage(tenantId, "nl", "Dutch (Nederlands)", "famfamfam-flags nl")
+                new ApplicationLanguage(tenantId, "es", "Español (Spanish)", "famfamfam-flags es")
             };
         }
 

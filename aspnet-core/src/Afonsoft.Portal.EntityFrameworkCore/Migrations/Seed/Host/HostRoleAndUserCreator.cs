@@ -1,12 +1,8 @@
 ﻿using System.Linq;
 using Abp;
-using Abp.Authorization;
-using Abp.Authorization.Roles;
 using Abp.Authorization.Users;
-using Abp.MultiTenancy;
 using Abp.Notifications;
 using Microsoft.EntityFrameworkCore;
-using Afonsoft.Portal.Authorization;
 using Afonsoft.Portal.Authorization.Roles;
 using Afonsoft.Portal.Authorization.Users;
 using Afonsoft.Portal.EntityFrameworkCore;
@@ -48,9 +44,9 @@ namespace Afonsoft.Portal.Migrations.Seed.Host
                 {
                     TenantId = null,
                     UserName = AbpUserBase.AdminUserName,
-                    Name = "admin",
-                    Surname = "admin",
-                    EmailAddress = "admin@aspnetzero.com",
+                    Name = "Afonso",
+                    Surname = "Dutra Nogueira",
+                    EmailAddress = "afonso.nogueira@outlook.com.br",
                     IsEmailConfirmed = true,
                     ShouldChangePasswordOnNextLogin = false,
                     IsActive = true,
