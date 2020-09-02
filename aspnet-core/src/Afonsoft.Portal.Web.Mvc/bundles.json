@@ -140,7 +140,11 @@
         "node_modules/jquery-serializejson/jquery.serializejson.js",
         "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
         "node_modules/tooltip.js/dist/umd/tooltip.min.js",
-        "node_modules/sticky-js/dist/sticky.min.js"
+        "node_modules/sticky-js/dist/sticky.min.js",
+        "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+        "wwwroot/lib/bootbox/bootbox.js",
+        "wwwroot/lib/bootstrap-slider/bootstrap-slider.min.js",
+        "wwwroot/lib/jquery-bootgrid/jquery.bootgrid.min.js"
       ]
     },
     {
@@ -288,6 +292,34 @@
         "node_modules/pwstrength-bootstrap/dist/pwstrength-bootstrap.js",
         "wwwroot/view-resources/Views/Account/Register.js"
       ]
+    },
+    {
+      "output": "view-resources/Areas/App/Views/_Bundles/device.min.js",
+      "input": [
+        "wwwroot/view-resources/Areas/App/Views/SetBox/index.js",
+        "wwwroot/view-resources/Areas/App/Views/SetBox/device.js"
+      ]
+    },
+    {
+      "output": "view-resources/Areas/App/Views/_Bundles/Company.min.js",
+      "input": [
+        "wwwroot/view-resources/Areas/App/Views/SetBox/index.js",
+        "wwwroot/view-resources/Areas/App/Views/SetBox/company.js"
+      ]
+    },
+    {
+      "output": "view-resources/Areas/App/Views/_Bundles/File.min.js",
+      "input": [
+        "wwwroot/view-resources/Areas/App/Views/SetBox/index.js",
+        "wwwroot/view-resources/Areas/App/Views/SetBox/file.js"
+      ]
+    },
+    {
+      "output": "view-resources/Areas/App/Views/_Bundles/Support.min.js",
+      "input": [
+        "wwwroot/view-resources/Areas/App/Views/SetBox/index.js",
+        "wwwroot/view-resources/Areas/App/Views/SetBox/support.js"
+      ]
     }
   ],
   "styles": [
@@ -302,6 +334,9 @@
     {
       "output": "view-resources/Areas/App/Views/_Bundles/common-styles.min.css",
       "input": [
+        "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+        "wwwroot/lib/bootstrap-slider/bootstrap-slider.min.css",
+        "wwwroot/lib/jquery-bootgrid/jquery.bootgrid.min.css",
         "wwwroot/Common/Styles/**/*.css",
         "wwwroot/Common/Styles/core.less",
         "wwwroot/fonts/fonts-poppins.css",
