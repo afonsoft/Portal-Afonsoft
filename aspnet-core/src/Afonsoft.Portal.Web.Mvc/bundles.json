@@ -293,34 +293,6 @@
         "node_modules/pwstrength-bootstrap/dist/pwstrength-bootstrap.js",
         "wwwroot/view-resources/Views/Account/Register.js"
       ]
-    },
-    {
-      "output": "view-resources/Areas/App/Views/_Bundles/device.min.js",
-      "input": [
-        "wwwroot/view-resources/Areas/App/Views/SetBox/index.js",
-        "wwwroot/view-resources/Areas/App/Views/SetBox/device.js"
-      ]
-    },
-    {
-      "output": "view-resources/Areas/App/Views/_Bundles/Company.min.js",
-      "input": [
-        "wwwroot/view-resources/Areas/App/Views/SetBox/index.js",
-        "wwwroot/view-resources/Areas/App/Views/SetBox/company.js"
-      ]
-    },
-    {
-      "output": "view-resources/Areas/App/Views/_Bundles/File.min.js",
-      "input": [
-        "wwwroot/view-resources/Areas/App/Views/SetBox/index.js",
-        "wwwroot/view-resources/Areas/App/Views/SetBox/file.js"
-      ]
-    },
-    {
-      "output": "view-resources/Areas/App/Views/_Bundles/Support.min.js",
-      "input": [
-        "wwwroot/view-resources/Areas/App/Views/SetBox/index.js",
-        "wwwroot/view-resources/Areas/App/Views/SetBox/support.js"
-      ]
     }
   ],
   "styles": [
