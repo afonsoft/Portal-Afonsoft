@@ -76,4 +76,12 @@
     <Folder Include="LOGS\" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="npm install" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="gulp build" />
+  </Target>
+
 </Project>
