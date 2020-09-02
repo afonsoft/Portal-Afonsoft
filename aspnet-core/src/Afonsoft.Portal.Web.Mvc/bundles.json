@@ -141,6 +141,7 @@
         "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
         "node_modules/tooltip.js/dist/umd/tooltip.min.js",
         "node_modules/sticky-js/dist/sticky.min.js",
+        "wwwroot/lib/jquery-ui/jquery-ui.min.js",
         "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
         "wwwroot/lib/bootbox/bootbox.js",
         "wwwroot/lib/bootstrap-slider/bootstrap-slider.min.js",
@@ -334,6 +335,7 @@
     {
       "output": "view-resources/Areas/App/Views/_Bundles/common-styles.min.css",
       "input": [
+        "wwwroot/lib/jquery-ui/jquery-ui.min.css",
         "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
         "wwwroot/lib/bootstrap-slider/bootstrap-slider.min.css",
         "wwwroot/lib/jquery-bootgrid/jquery.bootgrid.min.css",
