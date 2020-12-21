@@ -61,7 +61,7 @@ namespace Afonsoft.Portal.Web
 
             Configuration.Caching.Configure(TwoFactorCodeCacheItem.CacheName, cache =>
             {
-                cache.DefaultAbsoluteExpireTime = DateTime.UtcNow.AddMinutes(5);
+                cache.DefaultAbsoluteExpireTime = DateTime.UtcNow.AddMinutes(10);
             });
 
             ConfigureTokenAuth();
@@ -73,6 +73,11 @@ namespace Afonsoft.Portal.Web
             //Uncomment this line to use Hangfire instead of default background job manager (remember also to uncomment related lines in Startup.cs file(s)).
             Configuration.BackgroundJobs.UseHangfire();
             Configuration.BackgroundJobs.IsJobExecutionEnabled = true;
+
+            Configuration.Auditing.IsEnabledForAnonymousUsers = true;
+            Configuration.Auditing.IsEnabled = true;
+            Configuration.EntityHistory.IsEnabledForAnonymousUsers = true;
+            Configuration.EntityHistory.IsEnabled = true;
 
             //Uncomment this line to use Redis cache instead of in-memory cache.
             //See app.config for Redis configuration and connection string

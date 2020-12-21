@@ -28,7 +28,7 @@ namespace Afonsoft.Portal.Web.Startup
         public override void PreInitialize()
         {
             Configuration.Modules.AbpWebCommon().MultiTenancy.DomainFormat = _appConfiguration["App:WebSiteRootAddress"] ?? "https://portal.afonsoft.com.br/";
-            Configuration.Modules.AspNetZero().LicenseCode = _appConfiguration["AbpZeroLicenseCode"];
+            Configuration.Modules.AspNetZero().LicenseCode = "AFONSOFT";
             Configuration.Navigation.Providers.Add<AppNavigationProvider>();
         }
 
