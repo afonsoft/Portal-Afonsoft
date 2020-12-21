@@ -66,14 +66,18 @@ namespace Afonsoft.Portal.Web.Host.Controllers
 
             if (model.Button == "no")
             {
-                grantedConsent = ConsentResponse.Denied;
+                grantedConsent = new ConsentResponse 
+                { 
+                    ErrorDescription = "Denid", 
+                    Error = AuthorizationError.AccessDenied 
+                };
             }
             else if (model.Button == "yes")
             {
                 if (model.ScopesConsented != null && model.ScopesConsented.Any())
                 {
                     var scopes = model.ScopesConsented;
-                    if (ConsentOptions.EnableOfflineAccess == false)
+                    if (!ConsentOptions.EnableOfflineAccess)
                     {
                         scopes = scopes.Where(x => x != IdentityServerConstants.StandardScopes.OfflineAccess);
                     }
@@ -81,7 +85,7 @@ namespace Afonsoft.Portal.Web.Host.Controllers
                     grantedConsent = new ConsentResponse
                     {
                         RememberConsent = model.RememberConsent,
-                        ScopesConsented = scopes.ToArray()
+                        ScopesValuesConsented = scopes.ToArray()
                     };
                 }
                 else
@@ -122,13 +126,13 @@ namespace Afonsoft.Portal.Web.Host.Controllers
                 return null;
             }
 
-            var client = await _clientStore.FindEnabledClientByIdAsync(request.ClientId);
+            var client = await _clientStore.FindEnabledClientByIdAsync(request.Client.ClientId);
             if (client == null)
             {
                 return null;
             }
 
-            var resources = await _resourceStore.FindEnabledResourcesByScopeAsync(request.ScopesRequested);
+            var resources = await _resourceStore.FindEnabledResourcesByScopeAsync(request.ValidatedResources.RawScopeValues);
             if (resources != null && (resources.IdentityResources.Any() || resources.ApiResources.Any()))
             {
                 return CreateConsentViewModel(returnUrl, client, resources, model);
@@ -155,13 +159,13 @@ namespace Afonsoft.Portal.Web.Host.Controllers
             };
 
             vm.IdentityScopes = resources.IdentityResources.Select(x => CreateScopeViewModel(x, vm.ScopesConsented.Contains(x.Name) || model == null)).ToArray();
-            vm.ResourceScopes = resources.ApiResources.SelectMany(x => x.Scopes).Select(x => CreateScopeViewModel(x, vm.ScopesConsented.Contains(x.Name) || model == null)).ToArray();
-            if (ConsentOptions.EnableOfflineAccess && resources.OfflineAccess)
-            {
-                vm.ResourceScopes = vm.ResourceScopes.Union(new [] {
-                    GetOfflineAccessScope(vm.ScopesConsented.Contains(IdentityServerConstants.StandardScopes.OfflineAccess) || model == null)
-                });
-            }
+            //vm.ResourceScopes = resources.ApiResources.SelectMany(x => x.Scopes).Select(x => CreateScopeViewModel(x, vm.ScopesConsented.Contains(x) || model == null)).ToArray();
+            //if (ConsentOptions.EnableOfflineAccess && resources.OfflineAccess)
+            //{
+            //    vm.ResourceScopes = vm.ResourceScopes.Union(new [] {
+            //        GetOfflineAccessScope(vm.ScopesConsented.Contains(IdentityServerConstants.StandardScopes.OfflineAccess) || model == null)
+            //    });
+            //}
 
             return vm;
         }
@@ -179,7 +183,7 @@ namespace Afonsoft.Portal.Web.Host.Controllers
             };
         }
 
-        public ScopeViewModel CreateScopeViewModel(Scope scope, bool check)
+        public ScopeViewModel CreateScopeViewModel(ApiScope scope, bool check)
         {
             return new ScopeViewModel
             {

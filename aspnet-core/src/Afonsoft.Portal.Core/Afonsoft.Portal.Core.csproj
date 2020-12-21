@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props"></Import>
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AssemblyName>Afonsoft.Portal.Core</AssemblyName>
     <PackageId>Afonsoft.Portal.Core</PackageId>
@@ -22,23 +22,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.7" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.7" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.7" />
+    <PackageReference Include="Hangfire" Version="1.7.17" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.17" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.4.0" />
     <PackageReference Include="PayPalHttp" Version="1.0.0" />
-    <PackageReference Include="Stripe.net" Version="37.34.0" />
+    <PackageReference Include="Stripe.net" Version="39.31.0" />
     <PackageReference Include="PayPalCheckoutSdk" Version="1.0.3" />
-    <PackageReference Include="TimeZoneConverter" Version="3.2.0" />
-    <PackageReference Include="Abp.AspNetZeroCore" Version="2.1.1" />
+    <PackageReference Include="TimeZoneConverter" Version="3.3.0" />
+    <PackageReference Include="Abp.AspNetZeroCore" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.ZeroCore.IdentityServer4.EntityFrameworkCore" Version="5.12.0" />
-    <PackageReference Include="Abp.AutoMapper" Version="5.12.0" />
-    <PackageReference Include="Abp.MailKit" Version="5.12.0" />
-    <PackageReference Include="Abp.Zero.Ldap" Version="5.12.0" />
-    <PackageReference Include="Twilio" Version="5.46.0" />
+    <PackageReference Include="Abp.ZeroCore.IdentityServer4.EntityFrameworkCore" Version="6.1.1" />
+    <PackageReference Include="Abp.AutoMapper" Version="6.1.1" />
+    <PackageReference Include="Abp.MailKit" Version="6.1.1" />
+    <PackageReference Include="Abp.Zero.Ldap" Version="6.1.1" />
+    <PackageReference Include="Twilio" Version="5.52.1" />
   </ItemGroup>
 
   <ItemGroup>

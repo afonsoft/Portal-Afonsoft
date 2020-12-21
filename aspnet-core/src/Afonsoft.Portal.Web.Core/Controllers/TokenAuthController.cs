@@ -200,9 +200,9 @@ namespace Afonsoft.Portal.Web.Controllers
             return new AuthenticateResultModel
             {
                 AccessToken = accessToken,
-                ExpireInSeconds = (int)_configuration.AccessTokenExpiration.TotalSeconds,
+                ExpireInSeconds = (int)(_configuration.AccessTokenExpiration.ToUnixTimeSeconds() - DateTimeOffset.UtcNow.ToUnixTimeSeconds()),
                 RefreshToken = refreshToken,
-                RefreshTokenExpireInSeconds = (int)_configuration.RefreshTokenExpiration.TotalSeconds,
+                RefreshTokenExpireInSeconds = (int)(_configuration.RefreshTokenExpiration.ToUnixTimeSeconds() - DateTimeOffset.UtcNow.ToUnixTimeSeconds()),
                 EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
                 TwoFactorRememberClientToken = twoFactorRememberClientToken,
                 UserId = loginResult.User.Id,
@@ -235,7 +235,7 @@ namespace Afonsoft.Portal.Web.Controllers
 
                 var accessToken = CreateAccessToken(await CreateJwtClaims(principal.Identity as ClaimsIdentity, user));
 
-                return await Task.FromResult(new RefreshTokenResult(accessToken, GetEncryptedAccessToken(accessToken), (int)_configuration.AccessTokenExpiration.TotalSeconds));
+                return await Task.FromResult(new RefreshTokenResult(accessToken, GetEncryptedAccessToken(accessToken), (int)(_configuration.AccessTokenExpiration.ToUnixTimeSeconds() - DateTimeOffset.UtcNow.ToUnixTimeSeconds())));
             }
             catch (UserFriendlyException)
             {
@@ -328,7 +328,7 @@ namespace Afonsoft.Portal.Web.Controllers
             {
                 AccessToken = accessToken,
                 EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
-                ExpireInSeconds = (int)_configuration.AccessTokenExpiration.TotalSeconds
+                ExpireInSeconds = (int)(_configuration.AccessTokenExpiration.ToUnixTimeSeconds() - DateTimeOffset.UtcNow.ToUnixTimeSeconds())
             };
         }
 
@@ -342,7 +342,7 @@ namespace Afonsoft.Portal.Web.Controllers
             {
                 AccessToken = accessToken,
                 EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
-                ExpireInSeconds = (int)_configuration.AccessTokenExpiration.TotalSeconds
+                ExpireInSeconds = (int)(_configuration.AccessTokenExpiration.ToUnixTimeSeconds() - DateTimeOffset.UtcNow.ToUnixTimeSeconds())
             };
         }
 
@@ -378,10 +378,10 @@ namespace Afonsoft.Portal.Web.Controllers
                         {
                             AccessToken = accessToken,
                             EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
-                            ExpireInSeconds = (int)_configuration.AccessTokenExpiration.TotalSeconds,
+                            ExpireInSeconds = (int)(_configuration.AccessTokenExpiration.ToUnixTimeSeconds() - DateTimeOffset.UtcNow.ToUnixTimeSeconds()),
                             ReturnUrl = returnUrl,
                             RefreshToken = refreshToken,
-                            RefreshTokenExpireInSeconds = (int)_configuration.RefreshTokenExpiration.TotalSeconds
+                            RefreshTokenExpireInSeconds = (int)(_configuration.RefreshTokenExpiration.ToUnixTimeSeconds() - DateTimeOffset.UtcNow.ToUnixTimeSeconds())
                         };
                     }
                 case AbpLoginResultType.UnknownExternalLogin:
@@ -413,9 +413,9 @@ namespace Afonsoft.Portal.Web.Controllers
                         {
                             AccessToken = accessToken,
                             EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
-                            ExpireInSeconds = (int)_configuration.AccessTokenExpiration.TotalSeconds,
+                            ExpireInSeconds = (int)  (_configuration.AccessTokenExpiration.ToUnixTimeSeconds() - DateTimeOffset.UtcNow.ToUnixTimeSeconds()),
                             RefreshToken = refreshToken,
-                            RefreshTokenExpireInSeconds = (int)_configuration.RefreshTokenExpiration.TotalSeconds
+                            RefreshTokenExpireInSeconds = (int)(_configuration.RefreshTokenExpiration.ToUnixTimeSeconds() - DateTimeOffset.UtcNow.ToUnixTimeSeconds())
                         };
                     }
                 default:
@@ -603,7 +603,7 @@ namespace Afonsoft.Portal.Web.Controllers
                         {
                             new Claim(UserIdentifierClaimType, user.ToUserIdentifier().ToString())
                         },
-                        TimeSpan.FromDays(365)
+                        DateTime.UtcNow.AddYears(1)
                     );
                 }
             }
@@ -634,7 +634,7 @@ namespace Afonsoft.Portal.Web.Controllers
             }
         }
 
-        private string CreateAccessToken(IEnumerable<Claim> claims, TimeSpan? expiration = null)
+        private string CreateAccessToken(IEnumerable<Claim> claims, DateTimeOffset? expiration = null)
         {
             return CreateToken(claims, expiration ?? _configuration.AccessTokenExpiration);
         }
@@ -644,7 +644,7 @@ namespace Afonsoft.Portal.Web.Controllers
             return CreateToken(claims, AppConsts.RefreshTokenExpiration);
         }
 
-        private string CreateToken(IEnumerable<Claim> claims, TimeSpan? expiration = null)
+        private string CreateToken(IEnumerable<Claim> claims, DateTimeOffset? expiration = null)
         {
             var now = DateTime.UtcNow;
 
@@ -656,7 +656,7 @@ namespace Afonsoft.Portal.Web.Controllers
                 signingCredentials: _configuration.SigningCredentials,
                 expires: expiration == null ?
                     (DateTime?)null :
-                    now.Add(expiration.Value)
+                    expiration.Value.UtcDateTime
             );
 
             return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
@@ -667,7 +667,7 @@ namespace Afonsoft.Portal.Web.Controllers
             return SimpleStringCipher.Instance.Encrypt(accessToken, AppConsts.DefaultPassPhrase);
         }
 
-        private async Task<IEnumerable<Claim>> CreateJwtClaims(ClaimsIdentity identity, User user, TimeSpan? expiration = null, TokenType tokenType = TokenType.AccessToken)
+        private async Task<IEnumerable<Claim>> CreateJwtClaims(ClaimsIdentity identity, User user, DateTimeOffset? expiration = null, TokenType tokenType = TokenType.AccessToken)
         {
             var tokenValidityKey = Guid.NewGuid().ToString();
             var claims = identity.Claims.ToList();
@@ -703,7 +703,7 @@ namespace Afonsoft.Portal.Web.Controllers
             await _userManager.AddTokenValidityKeyAsync(
                 user,
                 tokenValidityKey,
-                DateTime.UtcNow.Add(expiration.Value)
+                expiration.Value.UtcDateTime
             );
 
             return claims;

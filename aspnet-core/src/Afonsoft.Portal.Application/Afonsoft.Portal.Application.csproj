@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props"></Import>
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AssemblyName>Afonsoft.Portal.Application</AssemblyName>
     <PackageId>Afonsoft.Portal.Application</PackageId>
@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="5.3.0" />
+    <PackageReference Include="EPPlus" Version="5.5.0" />
   </ItemGroup>
 
   <ItemGroup>

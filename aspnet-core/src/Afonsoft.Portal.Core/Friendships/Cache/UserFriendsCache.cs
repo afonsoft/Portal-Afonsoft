@@ -41,16 +41,19 @@ namespace Afonsoft.Portal.Friendships.Cache
         [UnitOfWork]
         public virtual UserWithFriendsCacheItem GetCacheItem(UserIdentifier userIdentifier)
         {
-            return _cacheManager
+            return (UserWithFriendsCacheItem)_cacheManager
                 .GetCache(FriendCacheItem.CacheName)
-                .Get<string, UserWithFriendsCacheItem>(userIdentifier.ToUserIdentifierString(), f => GetUserFriendsCacheItemInternal(userIdentifier));
+                .Get(userIdentifier.ToUserIdentifierString(), f => GetUserFriendsCacheItemInternal(userIdentifier));
+
+                //.Get<string, UserWithFriendsCacheItem>(userIdentifier.ToUserIdentifierString(), f => GetUserFriendsCacheItemInternal(userIdentifier));
         }
 
         public virtual UserWithFriendsCacheItem GetCacheItemOrNull(UserIdentifier userIdentifier)
         {
-            return _cacheManager
+            return (UserWithFriendsCacheItem)_cacheManager
                 .GetCache(FriendCacheItem.CacheName)
-                .GetOrDefault<string, UserWithFriendsCacheItem>(userIdentifier.ToUserIdentifierString());
+                .GetOrDefault(userIdentifier.ToUserIdentifierString());
+            //.GetOrDefault<string, UserWithFriendsCacheItem>(userIdentifier.ToUserIdentifierString());
         }
 
         [UnitOfWork]

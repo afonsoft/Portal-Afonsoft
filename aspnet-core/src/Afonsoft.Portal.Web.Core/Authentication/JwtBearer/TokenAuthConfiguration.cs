@@ -13,8 +13,8 @@ namespace Afonsoft.Portal.Web.Authentication.JwtBearer
 
         public SigningCredentials SigningCredentials { get; set; }
 
-        public TimeSpan AccessTokenExpiration { get; set; }
+        public DateTimeOffset AccessTokenExpiration { get; set; }
 
-        public TimeSpan RefreshTokenExpiration { get; set; }
+        public DateTimeOffset RefreshTokenExpiration { get; set; }
     }
 }

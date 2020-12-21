@@ -75,7 +75,7 @@ namespace Afonsoft.Portal.MultiTenancy.Payments.Stripe
                         Plan = newPlanId
                     }
                 },
-                Prorate = !isProrateCharged
+                //Prorate = !isProrateCharged
             });
 
             var lastRecurringPayment = await _subscriptionPaymentRepository.GetByGatewayAndPaymentIdAsync(SubscriptionPaymentGatewayType.Stripe, subscriptionId);

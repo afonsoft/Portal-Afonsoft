@@ -46,8 +46,8 @@ namespace Afonsoft.Portal
         public const string Theme11 = "theme11";
         public const string Theme12 = "theme12";
 
-        public static TimeSpan AccessTokenExpiration = TimeSpan.FromDays(1);
-        public static TimeSpan RefreshTokenExpiration = TimeSpan.FromDays(365);
+        public static DateTimeOffset AccessTokenExpiration = DateTime.UtcNow.AddDays(1);
+        public static DateTimeOffset RefreshTokenExpiration = DateTime.UtcNow.AddYears(1);
 
         public const string DateTimeOffsetFormat = "yyyy-MM-ddTHH:mm:sszzz";
     }

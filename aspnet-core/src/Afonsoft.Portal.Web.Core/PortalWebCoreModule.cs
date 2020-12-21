@@ -61,7 +61,7 @@ namespace Afonsoft.Portal.Web
 
             Configuration.Caching.Configure(TwoFactorCodeCacheItem.CacheName, cache =>
             {
-                cache.DefaultAbsoluteExpireTime = TimeSpan.FromMinutes(5);
+                cache.DefaultAbsoluteExpireTime = DateTime.UtcNow.AddMinutes(5);
             });
 
             ConfigureTokenAuth();

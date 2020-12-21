@@ -17,23 +17,20 @@ namespace Afonsoft.Portal.Authorization.Users
             IRepository<UserLogin, long> userLoginRepository,
             IRepository<UserRole, long> userRoleRepository,
             IRepository<Role> roleRepository,
-            IAsyncQueryableExecuter asyncQueryableExecuter, 
             IUnitOfWorkManager unitOfWorkManager,
             IRepository<UserClaim, long> userClaimRepository,
             IRepository<UserPermissionSetting, long> userPermissionSettingRepository,
             IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
             IRepository<OrganizationUnitRole, long> organizationUnitRoleRepository)
-            : base(
-                unitOfWorkManager,
-                userRepository,
-                roleRepository,
-                asyncQueryableExecuter,
-                userRoleRepository,
-                userLoginRepository,
-                userClaimRepository,
-                userPermissionSettingRepository,
-                userOrganizationUnitRepository,
-                organizationUnitRoleRepository)
+            : base(unitOfWorkManager,
+                  userRepository,
+                  roleRepository,
+                  userRoleRepository,
+                  userLoginRepository,
+                  userClaimRepository,
+                  userPermissionSettingRepository,
+                  userOrganizationUnitRepository,
+                  organizationUnitRoleRepository)
         {
         }
     }

@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props"></Import>
   
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AssemblyName>Afonsoft.Portal.GraphQL.Test.Base</AssemblyName>
     <PackageId>Afonsoft.Portal.GraphQL.Test.Base</PackageId>
@@ -22,20 +22,20 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.7" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.extensibility.execution" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Shouldly" Version="4.0.0-beta0002" />
+    <PackageReference Include="Shouldly" Version="4.0.3" />
     <PackageReference Include="NSubstitute" Version="4.2.2" />
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Abp.TestBase" Version="5.12.0" />
+    <PackageReference Include="Abp.TestBase" Version="6.1.1" />
   </ItemGroup>
 
   <ItemGroup>
