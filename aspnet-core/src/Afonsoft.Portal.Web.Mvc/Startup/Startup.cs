@@ -23,7 +23,6 @@ using Afonsoft.Portal.Web.Common;
 using Afonsoft.Portal.Web.Resources;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
 using Afonsoft.Portal.Web.Swagger;
-using System.Reflection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.DataProtection;
@@ -32,6 +31,7 @@ using System.IO.Compression;
 using WebMarkupMin.AspNetCore3;
 using System.Linq;
 using Abp.Extensions;
+using Afonsoft.Portal.Web.HealthCheck;
 
 namespace Afonsoft.Portal.Web.Startup
 {
@@ -82,21 +82,18 @@ namespace Afonsoft.Portal.Web.Startup
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
 
-            if (WebConsts.SwaggerUiEnabled)
+            //Swagger - Enable this line and the related lines in Configure method to enable swagger UI
+            services.AddSwaggerGen(options =>
             {
-                //Swagger - Enable this line and the related lines in Configure method to enable swagger UI
-                services.AddSwaggerGen(options =>
-                {
-                    options.SwaggerDoc("v1", new OpenApiInfo() { Title = "Portal API", Version = "v1" });
-                    options.DocInclusionPredicate((docName, description) => true);
-                    options.ParameterFilter<SwaggerEnumParameterFilter>();
-                    options.SchemaFilter<SwaggerEnumSchemaFilter>();
-                    options.OperationFilter<SwaggerOperationIdFilter>();
-                    options.OperationFilter<SwaggerOperationFilter>();
-                    options.IgnoreObsoleteActions();
-                    options.IgnoreObsoleteProperties();
-                });
-            }
+                options.SwaggerDoc("v1", new OpenApiInfo() { Title = "Portal API", Version = "v1" });
+                options.DocInclusionPredicate((docName, description) => true);
+                options.ParameterFilter<SwaggerEnumParameterFilter>();
+                options.SchemaFilter<SwaggerEnumSchemaFilter>();
+                options.OperationFilter<SwaggerOperationIdFilter>();
+                options.OperationFilter<SwaggerOperationFilter>();
+                options.IgnoreObsoleteActions();
+                options.IgnoreObsoleteProperties();
+            });
 
             //Recaptcha
             services.AddRecaptcha(new RecaptchaOptions
@@ -105,16 +102,13 @@ namespace Afonsoft.Portal.Web.Startup
                 SecretKey = _appConfiguration["Recaptcha:SecretKey"]
             });
 
-            if (WebConsts.HangfireDashboardEnabled)
+            //Hangfire(Enable to use Hangfire instead of default job manager)
+            services.AddHangfire(config =>
             {
-                //Hangfire(Enable to use Hangfire instead of default job manager)
-                services.AddHangfire(config =>
-                {
-                    config.UseLog4NetLogProvider();
-                    config.UseSqlServerStorage(_appConfiguration.GetConnectionString("Default"));
-                });
-            }
-
+                config.UseLog4NetLogProvider();
+                config.UseSqlServerStorage(_appConfiguration.GetConnectionString("Default"));
+            });
+            
             services.AddScoped<IWebResourceManager, WebResourceManager>();
 
             services.Configure<SecurityStampValidatorOptions>(options =>
@@ -196,37 +190,29 @@ namespace Afonsoft.Portal.Web.Startup
 
             app.UseCors(DefaultCorsPolicyName); //Enable CORS!
 
-            if (WebConsts.SwaggerUiEnabled)
+            // Enable middleware to serve generated Swagger as a JSON endpoint
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
             {
-                // Enable middleware to serve generated Swagger as a JSON endpoint
-                app.UseSwagger();
-                // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint(_appConfiguration["App:SwaggerEndPoint"], "Portal API V1");
-                }); //URL: /swagger
-            }
-
+                options.SwaggerEndpoint(_appConfiguration["App:SwaggerEndPoint"], "Portal API V1");
+            }); 
+            
             app.UseAuthentication();
             app.UseJwtTokenMiddleware();
             app.UseAuthorization();
 
-            if (WebConsts.HangfireDashboardEnabled)
+            //Hangfire dashboard &server(Enable to use Hangfire instead of default job manager)
+            app.UseHangfireDashboard(WebConsts.HangfireDashboardEndPoint, new DashboardOptions
             {
-                //Hangfire dashboard &server(Enable to use Hangfire instead of default job manager)
-                app.UseHangfireDashboard(WebConsts.HangfireDashboardEndPoint, new DashboardOptions
-                {
-                    Authorization = new[] {
-                        new AbpHangfireAuthorizationFilter(AppPermissions.Pages_Administration_HangfireDashboard),
-                        new AbpHangfireAuthorizationFilter(AppPermissions.Pages_Administration),
-                        new AbpHangfireAuthorizationFilter(AppPermissions.Pages)
-                    },
-                    IgnoreAntiforgeryToken = true,
-                });
-                app.UseHangfireServer();
-            }
-
+                Authorization = new[] {
+                    new AbpHangfireAuthorizationFilter(AppPermissions.Pages_Administration_HangfireDashboard),
+                    new AbpHangfireAuthorizationFilter(AppPermissions.Pages_Administration),
+                    new AbpHangfireAuthorizationFilter(AppPermissions.Pages)
+                },
+                IgnoreAntiforgeryToken = true,
+            });
+            app.UseHangfireServer();
+            
             app.UseHttpsRedirection();
             app.UseWebSockets();
             app.UseResponseCompression();
